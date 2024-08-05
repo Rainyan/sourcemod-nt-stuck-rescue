@@ -79,8 +79,8 @@ void StepsizeChanged(ConVar convar, const char[] oldValue, const char[] newValue
 
 MRESReturn CGameMovement__CheckJumpButton(Address pThis, DHookReturn hReturn)
 {
-	int client = GetBaseEntity(LoadFromAddress(pThis + view_as<Address>(8),
-		NumberType_Int32));
+	int client = GetBaseEntity(view_as<Address>(
+		LoadFromAddress(pThis + view_as<Address>(8), NumberType_Int32)));
 
 	if (_rescue[client])
 	{
