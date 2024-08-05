@@ -1,5 +1,5 @@
 # sourcemod-nt-stuck-rescue
-If a player is stuck between 2 slopes, allow them to jump to un-stuck.
+Experimental plugin for Neotokyo. If a player is stuck between 2 slopes, allow them to jump to un-stuck.
 
 Helps with situations like this:
 
