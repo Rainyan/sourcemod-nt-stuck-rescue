@@ -92,6 +92,13 @@ MRESReturn CGameMovement__CheckJumpButton(Address pThis, DHookReturn hReturn)
 
 MRESReturn CBaseEntity__GetGroundEntity(int pThis, DHookReturn hReturn)
 {
+	// Returns the calling entity itself as that entity's floor.
+	// This is done because returning nullptr here (i.e. "there is no floor")
+	// prevents the player from jumping. But we wanna let the player jump
+	// no matter what. Returning the player's own pointer as their floor ptr
+	// is nonsensical, but it's done purely to bypass this floor nullptr check
+	// temporarily. And as that ptr is not used for anything else within the
+	// CGameMovement__CheckJumpButton context, it's actually safe to do.
 	bool fake = _fakeground;
 	_fakeground = false;
 	if (fake)
@@ -157,7 +164,7 @@ void ProcessClient(int client)
 		return;
 	}
 
-	// Prev tick wasn't the inital falling velocity.
+	// Prev tick wasn't the initial falling velocity.
 	if (_prevVel[client] != (_prevVel[client] = absvel[2]))
 	{
 		return;
